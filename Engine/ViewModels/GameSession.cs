@@ -14,7 +14,7 @@ namespace Engine.ViewModels
     {
         public event EventHandler<GameMessageEventArgs> OnMessageRaised;
 
-
+        #region Properties
 
         private Location _currentLocation;
         private Monster _currentMonster;
@@ -57,27 +57,21 @@ namespace Engine.ViewModels
 
         public Weapon CurrentWeapon { get; set; }
 
-        public bool HasLocationToNorth
-        {
-            get { return CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate + 1) != null; }
-        }
+        public bool HasLocationToNorth =>
+            CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate + 1) != null; 
 
-        public bool HasLocationToWest
-        {
-            get { return CurrentWorld.LocationAt(CurrentLocation.XCoordinate - 1, CurrentLocation.YCoordinate) != null; }
-        }
+        public bool HasLocationToWest => 
+            CurrentWorld.LocationAt(CurrentLocation.XCoordinate - 1, CurrentLocation.YCoordinate) != null;
 
-        public bool HasLocationToEast
-        {
-            get { return CurrentWorld.LocationAt(CurrentLocation.XCoordinate + 1, CurrentLocation.YCoordinate) != null; }
-        }
+        public bool HasLocationToEast => 
+            CurrentWorld.LocationAt(CurrentLocation.XCoordinate + 1, CurrentLocation.YCoordinate) != null;
 
-        public bool HasLocationToSouth
-        {
-            get { return CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1) != null; }
-        }
+        public bool HasLocationToSouth =>
+            CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1) != null;
 
-        public bool HasMonster => CurrentMonster != null; // => is an expression-body. Same functionality as functions HasLocationTo..
+        public bool HasMonster => CurrentMonster != null;
+
+        #endregion
 
         public GameSession()
         {
