@@ -10,6 +10,8 @@ namespace Engine.Models
 {
     public class Player : BaseNotificationClass
     {
+        #region Properties
+
         private string _name;
         private string _characterClass;
         private int _hitPoints;
@@ -79,6 +81,8 @@ namespace Engine.Models
 
         public ObservableCollection<QuestStatus> Quests { get; set; }
 
+        #endregion
+
         public Player()
         {
             Inventory = new ObservableCollection<GameItem>();
@@ -90,6 +94,26 @@ namespace Engine.Models
             Inventory.Add(item);
 
             OnPropertyChanged(nameof(Weapons));
+        }
+
+        public void RemoveItemFromInventory(GameItem item)
+        {
+            Inventory.Remove(item);
+
+            OnPropertyChanged(nameof(Weapons));
+        }
+
+        public bool HasAllTheseItems(List<ItemQuantity> items)
+        {
+            foreach (ItemQuantity item in items)
+            {
+                if (Inventory.Count(i => i.ItemTypeID == item.ItemID) < item.Quantity)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
