@@ -18,12 +18,12 @@ namespace Engine.Actions
                 throw new ArgumentException($"{weapon.Name} is not a weapon.");
             }
 
-            if(_minimumDamage < 0)
+            if(minimumDamage < 0)
             {
                 throw new ArgumentException("minimumDamage must be 0 or larger");
             }
 
-            if(_maximumDamage < _minimumDamage)
+            if(maximumDamage < _minimumDamage)
             {
                 throw new ArgumentException("maximumDamage must be >= minimumDamage");
             }
@@ -37,13 +37,17 @@ namespace Engine.Actions
         {
             int damage = RandomNumberGenerator.NumberBetween(_minimumDamage, _maximumDamage);
 
+            string actorName = (actor is Player) ? "You" : $"The {actor.Name.ToLower()}";
+            string targetName = (target is Player) ? "you" : $"the {target.Name.ToLower()}";
+
             if(damage == 0)
             {
-                ReportResult($"You missed the {target.Name.ToLower()}.");
+                ReportResult($"{actorName} missed {targetName}.");
             }
             else
             {
-                ReportResult($"You hit the {target.Name.ToLower()} for {damage} points.");
+                ReportResult($"{actorName} hit {targetName} for {damage} point{(damage > 1 ? "s" : "")}.");
+
                 target.TakeDamage(damage);
             }
         }
