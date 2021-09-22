@@ -13,7 +13,7 @@
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
     </Window.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -25,10 +25,10 @@
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
-        <!-- Menu -->        
+
+        <!-- Menu -->
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Menu" Background="AliceBlue"/>
-        
+
         <!-- Player stats -->
         <Grid Grid.Row="1" Grid.Column="0" Background="Aquamarine">
             <Grid.RowDefinitions>
@@ -57,9 +57,9 @@
             <Label Grid.Row="4" Grid.Column="1" Content="{Binding CurrentPlayer.ExperiencePoints}"/>
             <Label Grid.Row="5" Grid.Column="0" Content="Level:"/>
             <Label Grid.Row="5" Grid.Column="1" Content="{Binding CurrentPlayer.Level}"/>
-            
+
         </Grid>
-        
+
         <!-- Gameplay -->
         <Grid Grid.Row="1" Grid.Column="1" Background="Beige">
             <Grid.RowDefinitions>
@@ -71,7 +71,7 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            
+
             <!-- Game Messages -->
             <Border Grid.Row="0" Grid.Column="0"
                     Grid.RowSpan="2"
@@ -87,13 +87,13 @@
                         </Style>
                     </RichTextBox.Resources>
                 </RichTextBox>
-                                
+
             </Border>
-            
+
             <!-- Location information -->
             <Border Grid.Row="0" Grid.Column="1" 
                     BorderBrush="Gainsboro" BorderThickness="1">
-                
+
                 <Grid Margin="3">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -117,7 +117,7 @@
                                TextWrapping="Wrap"/>
                 </Grid>
             </Border>
-            
+
             <!-- Monster information -->
             <Border Grid.Row="1" Grid.Column="1" 
                     BorderBrush="Gainsboro" BorderThickness="1">
@@ -157,20 +157,20 @@
                 <TabItem Header="Inventory">
                     <DataGrid ItemsSource="{Binding CurrentPlayer.GroupedInventory}"
                               AutoGenerateColumns="False"
-                              HeadersVisibility="Column">
+                              HeadersVisibility="Column" Margin="0,0,0.333,0.333">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Description"
-                                                Binding="{Binding Item.Name}"
+                                                Binding="{Binding Item.Name, Mode=OneWay}"
                                                 Width="*"/>
                             <DataGridTextColumn Header="Qty"
                                                 IsReadOnly="True"
                                                 Width="Auto"
-                                                Binding="{Binding Quantity}"/>
+                                                Binding="{Binding Quantity, Mode=OneWay}"/>
                             <DataGridTextColumn Header="Price"
-                                                Binding="{Binding Item.Price}"
+                                                Binding="{Binding Item.Price, Mode=OneWay}"
                                                 Width="Auto"/>
                         </DataGrid.Columns>
-                        
+
                     </DataGrid>
                 </TabItem>
 
@@ -180,11 +180,23 @@
                               HeadersVisibility="Column">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name"
-                                                Binding="{Binding PlayerQuest.Name}"
+                                                Binding="{Binding PlayerQuest.Name, Mode=OneWay}"
                                                 Width="*"/>
                             <DataGridTextColumn Header="Done?"
-                                                Binding="{Binding IsCompleted}"
+                                                Binding="{Binding IsCompleted, Mode=OneWay}"
                                                 Width="Auto"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+
+                <TabItem Header="Recipes">
+                    <DataGrid ItemsSource="{Binding CurrentPlayer.Recipes}"
+                              AutoGenerateColumns="False"
+                              HeadersVisibility="Column">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name"
+                                                Binding="{Binding Name, Mode=OneWay}"
+                                                Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
@@ -278,10 +290,10 @@
                         Height="25" Width="65" Margin="10"
                         Click="OnClick_MoveSouth"
                         Visibility="{Binding HasLocationToSouth, Converter={StaticResource BooleanToVisibility}}"
-                        Content="South"/>                
+                        Content="South"/>
 
             </Grid>
-            
+
         </Grid>
 
     </Grid>
