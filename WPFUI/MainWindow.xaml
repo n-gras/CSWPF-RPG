@@ -152,10 +152,12 @@
                 </Grid>
             </Border>
         </Grid>
-
+            
+        <!-- Inventory, Quests, and Recipes -->
         <Grid Grid.Row="2" Grid.Column="0" Background="BurlyWood">
-            <TabControl>
-                <TabItem Header="Inventory">
+            <TabControl x:Name="PlayerDataTabControl">
+                <TabItem Header="Inventory"
+                         x:Name="InventoryTabItem">
                     <DataGrid ItemsSource="{Binding CurrentPlayer.GroupedInventory}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column" Margin="0,0,0.333,0.333">
@@ -175,7 +177,8 @@
                     </DataGrid>
                 </TabItem>
 
-                <TabItem Header="Quests">
+                <TabItem Header="Quests"
+                         x:Name="QuestsTabItem">
                     <DataGrid ItemsSource="{Binding CurrentPlayer.Quests}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column">
@@ -190,7 +193,8 @@
                     </DataGrid>
                 </TabItem>
 
-                <TabItem Header="Recipes">
+                <TabItem Header="Recipes"
+                         x:Name="RecipesTabItem">
                     <DataGrid ItemsSource="{Binding CurrentPlayer.Recipes}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column">
